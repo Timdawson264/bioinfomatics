@@ -1,0 +1,19 @@
+So this is how it works... Hopefully its working right.
+We get about 3078 matches for variancecs inside exonic regions.
+
+check_exons.py 
+	USAGE: python check_exons.py exons_clean_sorted.txt sickle.test
+- Reads in a file containing the exonic regions, and one of the matching variants detected by Tim's C code.
+- Exonic region input should be formatted like
+	CHROMOSOME	STARTPOS	ENDPOS
+- Both input files should be sorted by chromosome
+
+remove_irrelevant_exonic.awk 
+- Removes everything but Chromosome, Startpos, and Endpos for exonic regions.
+- You should sort the output of this awk program by chromosome number.
+- Sorting can be done by:
+	sort -k1 -n FILENAME
+
+A sorted, cleaned up exon file has already been made (exons_clean_sorted.txt)
+
+glhf
