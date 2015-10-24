@@ -7,8 +7,7 @@ gcc family.c -ggdb -O4 -o family;
 #spp =  Spastic Paraplegia
 #retina = Retinitis Pigmentosa
 
-./family sickle /tmp/family.vcf > sickle.vcf;
-./family ssd /tmp/family.vcf > ssd.vcf;
-./family spp /tmp/family.vcf > spp.vcf;
-./family retina /tmp/family.vcf > retina.vcf;
-
+./family sickle /tmp/family.vcf | pigz -9 > sickle.vcf.gz;
+./family ssd /tmp/family.vcf    | pigz -9 > ssd.vcf.gz;
+./family spp /tmp/family.vcf    | pigz -9 > spp.vcf.gz;
+./family retina /tmp/family.vcf | pigz -9 > retina.vcf.gz;
