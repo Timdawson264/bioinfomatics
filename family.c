@@ -26,7 +26,7 @@ uint8_t retina_inheritance_ptn3[] = {1, 0, 0, 1, 0, 0, 1};
 size_t linenum;
 
 
-void (*disease_check)(uint8_t family[NUM_FAMILY], char * line);
+void (*disease_check)(uint8_t family[NUM_FAMILY], char * line) = NULL;
 
 
 void retina_check(uint8_t family[NUM_FAMILY], char * line){
@@ -75,7 +75,7 @@ void ssd_check(uint8_t family[NUM_FAMILY], char * line){
 }
 
 
-void sickle_cell_check(uint8_t family[NUM_FAMILY], char * line){
+void sickle_check(uint8_t family[NUM_FAMILY], char * line){
     //check for possible mutations that match expression
     size_t m=0,i;
 
@@ -127,10 +127,10 @@ int main(int argc, char ** argv){
       exit(2);
     }
 
-    if(strcmp("sickle", argv[1])) disease_check=sickle_cell_check;
-    if(strcmp("ssd", argv[1])) disease_check=ssd_check; 
-    if(strcmp("spp", argv[1])) disease_check=spp_check;
-    if(strcmp("retina", argv[1])) disease_check=retina_check;
+    if(strcmp("sickle", argv[1])==0) disease_check=sickle_check;
+    if(strcmp("ssd", argv[1])==0) disease_check=ssd_check; 
+    if(strcmp("spp", argv[1])==0) disease_check=spp_check;
+    if(strcmp("retina", argv[1])==0) disease_check=retina_check;
     
     FILE * varfile = fopen(argv[2], "r");
     if(!varfile){
@@ -163,5 +163,6 @@ int main(int argc, char ** argv){
       //No Sex Chromosomes 
       if(line[0]=='X' || line[0]=='Y') break;
       check_line(line);
+      linenum++;
     }
 }
