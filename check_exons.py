@@ -38,7 +38,7 @@ def check_exon_function():
 
 	for exonic_region in exonic_file:
 		# Split into array
-		exonic_region_split = exonic_region[:-1].split("\t")
+		exonic_region_split = exonic_region[:-1].split(" ")
 
 		# get chromosome, start, and end for exonic region
 		exonic_region_chromosome = int(exonic_region_split[EXONIC_INDEX_CHROMOSOME])
@@ -49,14 +49,23 @@ def check_exon_function():
 			continue
 
 		# until we reach the end of this chromosome in the variant file
-		while current_variant_chromosome == exonic_region_chromosome:
+		while current_variant_chromosome <= exonic_region_chromosome:
+
+			if current_variant_chromosome < exonic_region_chromosome:
+				current_variant_line = variant_file.readline()[:-1]
+				current_variant_split = current_variant_line.split("\t")
+				if current_variant_split == ['']:
+					# We reached end of variant file. Done.
+					return
+				current_variant_chromosome = int(current_variant_split[VARIANT_INDEX_CHROMOSOME])
+				current_variant_location = int(current_variant_split[VARIANT_INDEX_LOCATION])
 
 			if(current_variant_location >= exonic_region_start) & (current_variant_location <= exonic_region_end):
 				# Variant is in chromosome, and in exonic region.
 				print current_variant_line
 
 				# UNCOMMENT THE BELOW LINE TO PRINT THE REGION IT WAS FOUND IN
-				#print exonic_region
+				# print exonic_region
 
 			elif current_variant_location > exonic_region_end:
 				# current variant is forward of this exonic region. Read next exonic region.
@@ -70,6 +79,6 @@ def check_exon_function():
 				return
 			current_variant_chromosome = int(current_variant_split[VARIANT_INDEX_CHROMOSOME])
 			current_variant_location = int(current_variant_split[VARIANT_INDEX_LOCATION])
-
+	print 'end'
 if __name__ == "__main__":
 	check_exon_function()
