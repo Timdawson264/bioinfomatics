@@ -72,7 +72,7 @@ def check_common_function():
 
 			'''
 			if(current_variant_location == common_variant_location):
-				# Print variant + "common" tag
+				print current_variant_line
 				# Read next variant from variant file
 				current_variant_line = variant_file.readline()[:-1]
 				current_variant_split = current_variant_line.split("\t")
