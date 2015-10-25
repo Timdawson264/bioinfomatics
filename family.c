@@ -165,4 +165,6 @@ int main(int argc, char ** argv){
       check_line(line);
       linenum++;
     }
+
+    fflush(stdout);
 }
