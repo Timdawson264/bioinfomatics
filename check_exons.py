@@ -21,7 +21,7 @@ def check_exon_function():
 
 
 	# skip title row
-	print variant_file.readline()
+	print variant_file.readline()[:-1]
 
 	# read first variant
 	current_variant_line = variant_file.readline()[:-1]
