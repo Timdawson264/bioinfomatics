@@ -1,0 +1,22 @@
+create table Exons(
+bin smallint(5), 
+name varchar(255), 
+chrom varchar(255), 
+strand char(1), 
+txStart int, 
+txEnd int,
+cdsStart int, 
+cdsEnd int, 
+exonCount int,
+exonStarts longblob, 
+exonEnds longblob, 
+score int(11),  
+name2 varchar(255), 
+cdsStartStat varchar(10), 
+cdsEndStat varchar(10),
+exonFrames longblob
+);
+
+create index IDX ON Exons(chrom, txStart, txEnd);
+.mode tabs
+.import exons.txt Exons
