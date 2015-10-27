@@ -31,10 +31,10 @@ zcat exonic_region_vcf/retina.vcf.gz  |  python2 ./common_var.py $SortedCommon /
 echo "Running gene filter"
 #Dysplasia.txt  Retinitis.txt  Sickle.txt  Spastic.txt
 
-zcat uncommon/sickle.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Sickle.txt"    > final_vcf/sickle.vcf
-zcat uncommon/ssd.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Dysplasia.txt"    > final_vcf/ssd.vcf
-zcat uncommon/spp.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Spastic.txt"      > final_vcf/spp.vcf
-zcat uncommon/retina.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Retinitis.txt" > final_vcf/retina.vcf
+zcat uncommon/sickle.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Sickle.txt"   | pigz -11  > final_vcf/sickle.vcf.gz
+zcat uncommon/ssd.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Dysplasia.txt"   | pigz -11  > final_vcf/ssd.vcf.gz
+zcat uncommon/spp.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Spastic.txt"     | pigz -11  > final_vcf/spp.vcf.gz
+zcat uncommon/retina.vcf.gz |  python2 ./exons_finder.py exons.sqlite /dev/stdin "Associated Genes/Retinitis.txt"| pigz -11  > final_vcf/retina.vcf.gz
 
 #cat exons.txt | cut -f3,5,6 | sed -e 's/chr//' | grep -Pv "^(X|Y|M|U)"  | sed -re 's/_[^\t ]*//g' > allranges.txt 
 

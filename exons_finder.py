@@ -22,12 +22,15 @@ if __name__ == "__main__":
   while variant_file.readline()[1]=='#': pass
   
   for var in variant_file:
-    
+    printvar=0
     v = var.split("\t")
     t = (v[VARIANT_INDEX_CHROMOSOME],v[VARIANT_INDEX_LOCATION],v[VARIANT_INDEX_LOCATION])
-    for row in conn.execute('select name, name2 from Exons where chrom="chr"||? and  txStart<=? and txEnd>=?', t):
+    #select name,name2 from Exons where chrom="chr1" and txStart<=204380444 and txEnd>=204380444 
+    for row in conn.execute('select name, name2, exonStarts, exonEnds from Exons where chrom="chr"||? and  txStart<=? and txEnd>=?', t):
       if(row[1] in genes):
-        print row[0], row[1]
-        print var
-        print
+            printvar=1
+            print row[0], row[1]
+    if(printvar):
+      print var
+      print
 

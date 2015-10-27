@@ -1,1 +1,9 @@
-./family
+family
+vcf/ALL_merged.vcf
+vcf/ALL_merged.vcf.gz
+vcf/ALL_merged.vcf.tsv
+vcf/ALL_merged_sorted.vcf
+vcf/family.vcf
+vcf/family.vcf.gz
+vcf/sql
+vcf/test.sqlite
